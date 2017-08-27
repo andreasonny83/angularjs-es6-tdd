@@ -7,6 +7,9 @@
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
   * [Setup](#setup)
+* [Run the Application](#run-the-application)
+* [Run the Tests](#run-the-tests)
+* [License](#license)
 
 ## Prerequisites
 
@@ -47,7 +50,7 @@ Now open your browse to
 This task will also watch for any file change to your project's files and
 update the browser with the new changes using Webpack and WebpackDevServer.
 
-## Running Unit tests
+## Run the tests
 
 ```sh
 npm test
@@ -62,6 +65,10 @@ developing new code:
 ```sh
 npm run test:watch
 ```
+
+## License
+
+MIT © [Andrea Sonny](https://andreasonny.mit-license.org/2017)
 
 [nodejs]: https://nodejs.org/
 [latest_release]: https://github.com/andreasonny83/angularjs-es6-tdd/releases/latest
