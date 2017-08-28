@@ -12,14 +12,13 @@ const config = {
     modules: [
       './node_modules',
     ],
-
   },
 
   entry: './src/main.js',
 
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
 
   module: {
@@ -30,20 +29,23 @@ const config = {
         test: /\.js$/,
         loader: 'source-map-loader',
         exclude: [
-          /node_modules/
-        ]
+          /node_modules/,
+        ],
       },
 
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: [
+          { loader: 'ng-annotate-loader' },
+          { loader: 'babel-loader' },
+        ]
       },
 
       {
         test: /\.html$/,
         exclude: /node_modules/,
-        loader: 'html-loader'
+        loader: 'html-loader',
       },
     ]
   },
@@ -53,7 +55,7 @@ const config = {
 
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      inject: 'body'
+      inject: 'body',
     }),
   ],
 

@@ -8,24 +8,34 @@ const config = {
 
   entry: './src/main.js',
 
+  resolve: {
+    extensions: ['.ts', '.js'],
+
+    modules: [
+      './node_modules',
+    ],
+  },
+
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
 
   module: {
     rules: [
       {
         test: /\.js$/,
-        // exclude: /(node_modules|bower_components)/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: [
+          { loader: 'ng-annotate-loader' },
+          { loader: 'babel-loader' },
+        ]
       },
 
       {
         test: /\.html$/,
         exclude: /node_modules/,
-        loader: 'html-loader'
+        loader: 'html-loader',
       },
     ]
   },
@@ -33,13 +43,12 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      inject: 'body'
+      inject: 'body',
     }),
   ],
 
   devServer: {
     contentBase: 'src/',
-    // stats: 'minimal',
     historyApiFallback: true,
   }
 };
