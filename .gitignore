@@ -61,5 +61,5 @@ typings/
 # Distribution folder
 /dist
 
-VSCode
+# VSCode
 /.vscode
