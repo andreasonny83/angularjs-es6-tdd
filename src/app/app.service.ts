@@ -1,5 +1,9 @@
 export default class AppService {
+  private _appName: string;
+
   constructor() {
+    'ngInject';
+
     this._appName;
   }
 

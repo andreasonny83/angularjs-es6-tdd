@@ -2,11 +2,10 @@ const path = require('path');
 const nodeEnvironment = process.env.NODE_ENV;
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = {
   devtool: 'source-map',
-
-  entry: './src/main.js',
 
   resolve: {
     extensions: ['.ts', '.js'],
@@ -16,6 +15,8 @@ const config = {
     ],
   },
 
+  entry: './src/main',
+
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -23,6 +24,15 @@ const config = {
 
   module: {
     rules: [
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: [
+          { loader: 'ng-annotate-loader' },
+          { loader: 'awesome-typescript-loader' },
+        ]
+      },
+
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -34,8 +44,8 @@ const config = {
 
       {
         test: /\.html$/,
-        exclude: /node_modules/,
         loader: 'html-loader',
+        exclude: /node_modules/,
       },
     ]
   },
@@ -45,6 +55,17 @@ const config = {
       template: './src/index.html',
       inject: 'body',
     }),
+
+    new CopyWebpackPlugin([
+      // Copy directory contents to {output}/
+      { from: 'src/images', to: 'images' },
+    ]),
+
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      sourceMap: true,
+    }),
+
   ],
 
   devServer: {

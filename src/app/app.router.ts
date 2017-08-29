@@ -1,8 +1,10 @@
-export default AppConfig;
+import { StateProvider } from 'angular-ui-router';
 
-function AppConfig(
+export default function AppRouter(
     $stateProvider,
   ) {
+    'ngInject';
+
     $stateProvider
       .state('app', {
         url: '/',

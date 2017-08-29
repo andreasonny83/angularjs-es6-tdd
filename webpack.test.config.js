@@ -14,7 +14,7 @@ const config = {
     ],
   },
 
-  entry: './src/main.js',
+  entry: './src/main',
 
   output: {
     filename: 'bundle.js',
@@ -34,6 +34,15 @@ const config = {
       },
 
       {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: [
+          { loader: 'ng-annotate-loader' },
+          { loader: 'awesome-typescript-loader' },
+        ]
+      },
+
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: [
@@ -44,8 +53,8 @@ const config = {
 
       {
         test: /\.html$/,
-        exclude: /node_modules/,
         loader: 'html-loader',
+        exclude: /node_modules/,
       },
     ]
   },

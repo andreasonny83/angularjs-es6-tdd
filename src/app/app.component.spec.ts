@@ -1,11 +1,10 @@
-import angular from 'angular';
+import * as angular from 'angular';
 import 'angular-mocks';
-import AppComponent from './app.component';
+import { AppComponent } from './app.component';
 
 class AppServiceStub {
-  constructor() {
-    this.appName;
-  }
+  appName: string;
+  constructor() { }
 }
 
 describe('App component', () => {
@@ -19,7 +18,7 @@ describe('App component', () => {
   beforeEach(() => {
     angular
       .module('test.app', [])
-      .component('cmpApp', AppComponent);
+      .component('cmpApp', new AppComponent());
   });
 
   beforeEach(() => {
