@@ -1,39 +1,23 @@
 import angular from 'angular';
 import 'angular-mocks';
-import AppComponent from './app.component';
-
-class AppServiceStub {
-  constructor() {
-    this.appName;
-  }
-}
+import './app.module';
 
 describe('App component', () => {
   let scope;
+  let $componentController;
   let controller;
   let element;
+  let component;
 
-  /**
-   * Create a test app in where testing the component
-   */
-  beforeEach(() => {
-    angular
-      .module('test.app', [])
-      .component('cmpApp', AppComponent);
-  });
-
-  beforeEach(() => {
-    angular.mock.module('test.app', ($provide) => {
-      $provide.service('AppService', AppServiceStub);
-    });
-  });
+   beforeEach(angular.mock.module('app.module'));
 
   /**
    * Create the cmpApp element and controller
    */
   beforeEach(
-  inject(($rootScope, $compile, $componentController) => {
+  inject(($rootScope, $compile, _$componentController_) => {
     scope = $rootScope.$new();
+    $componentController = _$componentController_;
 
     element = angular.element('<cmp-app></cmp-app>');
     element = $compile(element)(scope);
